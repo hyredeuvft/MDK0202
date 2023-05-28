@@ -1,0 +1,58 @@
+﻿<Window x:Class="OrderOnline.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OrderOnline"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid>
+
+       
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <TextBlock x:Name="tbTitleOrder"
+            Text="Заказ"
+                   FontSize="30"
+                   HorizontalAlignment="Center"/>
+        <!--ListView Для вывода всех товаров в заказе-->
+        <ListView x:Name="LvOrdertList" 
+            HorizontalAlignment="Center"
+                  Grid.Row="1"
+                  d:ItemsSource="{d:SampleData ItemCount=30}"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" Background="Transparent">
+            <!--Для того чтобы товары были динамически двигаемые-->
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+
+            <!--Тут мы Говорим, из чего будут состоять объекты в ListView-->
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border Height="130" Width="90"
+                            BorderBrush="Black"
+                            BorderThickness="2">
+                        <StackPanel>
+                            <Image Width="100"
+                                   Height="70"
+                                Source="{Binding ImagePath}"/>
+                            <TextBlock Text="{Binding Title}"
+                                       Margin="5 0 0 0"/>
+                            <TextBlock Text="{Binding Cost}"
+                                        Margin="5 0 0 0"/>
+                        </StackPanel>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Window>
